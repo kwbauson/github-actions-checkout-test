@@ -4,4 +4,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6.0.1
-      - run: git config --list --show-origin | grep shouldfail
+      - run: git config --list --show-origin | grep extraheader
