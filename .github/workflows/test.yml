@@ -3,5 +3,14 @@ jobs:
   checkout:
     runs-on: ubuntu-latest
     steps:
+      - run: |
+          mkdir checkout-location
+          ln -s checkout-location{,-link}
       - uses: actions/checkout@v6.0.1
-      - run: git config --list --show-origin | grep extraheader
+        with:
+          path: checkout-location
+      - run: |
+          cd checkout-location
+          git config --list --show-origin | grep extraheader
+          cd ../checkout-location-link
+          git config --list --show-origin | grep extraheader
