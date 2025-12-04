@@ -4,19 +4,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          mkdir checkout-location
-          ln -s checkout-location{,-link}
+          mkdir dir
+          ln -s dir link
       - uses: actions/checkout@v6.0.1
         with:
-          path: checkout-location-link
+          path: link
       - run: |
-          cd checkout-location
-          git config --list --show-origin
-          cd ..
-
-          cd checkout-location
-          git config --list --show-origin | grep extraheader
-          cd ..
-
-          cd checkout-location-link
+          cd link
           git config --list --show-origin | grep extraheader
