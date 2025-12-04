@@ -1,12 +1,25 @@
 on: push
 jobs:
-  checkout:
+  checkout-fail:
     runs-on: ubuntu-latest
     steps:
       - run: |
           mkdir dir
           ln -s dir link
       - uses: actions/checkout@v6.0.1
+        with:
+          path: link
+      - run: |
+          cd dir
+          git config --list --show-origin | grep extraheader
+
+  checkout-pass:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir dir
+          ln -s dir link
+      - uses: kwbauson/github-actions-checkout@fb7124daff9724c1a9bcfca0f089ef4454c80098
         with:
           path: link
       - run: |
