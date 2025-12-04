@@ -21,7 +21,7 @@ jobs:
             exit 1
           fi
 
-  checkout-fail:
+  checkout-pass:
     runs-on: ubuntu-latest
     steps:
       - name: Setup for symlink test
