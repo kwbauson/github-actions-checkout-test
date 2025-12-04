@@ -10,5 +10,5 @@ jobs:
         with:
           path: link
       - run: |
-          cd link
+          cd dir
           git config --list --show-origin | grep extraheader
