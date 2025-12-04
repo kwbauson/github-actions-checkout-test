@@ -11,6 +11,12 @@ jobs:
           path: checkout-location
       - run: |
           cd checkout-location
+          git config --list --show-origin
+          cd ..
+
+          cd checkout-location
           git config --list --show-origin | grep extraheader
-          cd ../checkout-location-link
+          cd ..
+
+          cd checkout-location-link
           git config --list --show-origin | grep extraheader
