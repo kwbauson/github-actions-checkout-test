@@ -8,7 +8,7 @@ jobs:
           ln -s checkout-location{,-link}
       - uses: actions/checkout@v6.0.1
         with:
-          path: checkout-location
+          path: checkout-location-link
       - run: |
           cd checkout-location
           git config --list --show-origin
