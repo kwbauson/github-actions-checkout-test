@@ -3,25 +3,41 @@ jobs:
   checkout-fail:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          mkdir dir
-          ln -s dir link
-      - uses: actions/checkout@v6.0.1
+      - name: Setup for symlink test
+        run: mkdir symlink-test-real && ln -s symlink-test-real symlink-test-link
+      - name: Checkout for worktree test
+        uses: actions/checkout@v6.0.1
         with:
-          path: link
-      - run: |
-          cd dir
-          git config --list --show-origin | grep extraheader
+          path: symlink-test-link
+      - name: Verify symlink credentials
+        run: |
+          cd symlink-test-real
+          if git config --list --show-origin | grep -q "extraheader"; then
+            echo "Credentials are configured"
+          else
+            echo "ERROR: Credentials are NOT configured"
+            echo "Full git config:"
+            git config --list --show-origin
+            exit 1
+          fi
 
-  checkout-pass:
+  checkout-fail:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          mkdir dir
-          ln -s dir link
-      - uses: kwbauson/github-actions-checkout@fb7124daff9724c1a9bcfca0f089ef4454c80098
+      - name: Setup for symlink test
+        run: mkdir symlink-test-real && ln -s symlink-test-real symlink-test-link
+      - name: Checkout for worktree test
+        uses: kwbauson/github-actions-checkout@fb7124daff9724c1a9bcfca0f089ef4454c80098
         with:
-          path: link
-      - run: |
-          cd dir
-          git config --list --show-origin | grep extraheader
+          path: symlink-test-link
+      - name: Verify symlink credentials
+        run: |
+          cd symlink-test-real
+          if git config --list --show-origin | grep -q "extraheader"; then
+            echo "Credentials are configured"
+          else
+            echo "ERROR: Credentials are NOT configured"
+            echo "Full git config:"
+            git config --list --show-origin
+            exit 1
+          fi
